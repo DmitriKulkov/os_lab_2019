@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     int id = fork();
-    if (id > 0)
+    if (id == 0)
     {
         execvp("./sequential_min_max", argv);
     }
