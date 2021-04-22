@@ -16,7 +16,6 @@
 #include "utils.h"
 
 #include <pthread.h>
-#include "sum.h"
 
 struct SumArgs {
   int *array;
