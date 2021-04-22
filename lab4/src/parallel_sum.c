@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@DmitriKulkov 
-Terekhov01
-/
-os_lab_2019
-forked from IpovsOperatingSystems/os_lab_2019
-0
-0349
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-os_lab_2019/lab4/src/parallel_sum.c
-
-terekhov01 done
-Latest commit 3696bb4 14 days ago
- History
- 1 contributor
-Executable File  161 lines (136 sloc)  3.81 KB
-  
 #include <ctype.h>
 #include <limits.h>
 #include <stdbool.h>
@@ -48,20 +18,20 @@ Executable File  161 lines (136 sloc)  3.81 KB
 #include <pthread.h>
 #include "sum.h"
 
-// struct SumArgs {
-//   int *array;
-//   int begin;
-//   int end;
-// };
+struct SumArgs {
+  int *array;
+  int begin;
+  int end;
+};
 
-// int Sum(const struct SumArgs *args) {
-//   int sum = 0;
-//   for(int i=args->begin;i<args->end;i++)
-//   {
-//       sum+=args->array[i];
-//   }
-//   return sum;
-// }
+int Sum(const struct SumArgs *args) {
+  int sum = 0;
+  for(int i=args->begin;i<args->end;i++)
+  {
+      sum+=args->array[i];
+  }
+  return sum;
+}
 
 void *ThreadSum(void *args) {
   struct SumArgs *sum_args = (struct SumArgs *)args;
@@ -157,8 +127,8 @@ int main(int argc, char **argv) {
 
   struct SumArgs args[threads_num];
   for (uint32_t i = 0; i < threads_num; i++) {
-    args[i].array = array;
-    args[i].begin = i * n;
+    args[i].array = array; 
+    args[i].begin = i * n; 
     args[i].end = (i+1)*n;
     if (pthread_create(&threads[i], NULL, ThreadSum, (void *)&args[i])) {
       printf("Error: pthread_create failed!\n");
@@ -184,16 +154,3 @@ int main(int argc, char **argv) {
   printf("Elapsed time: %fms\n", elapsed_time);
   return 0;
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
